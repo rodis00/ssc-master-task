@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -51,4 +52,6 @@ public class Task {
     private Integer maximumAgeInYears;
 
     private Boolean isActive;
+
+    private List<String> modificationHistory;
 }

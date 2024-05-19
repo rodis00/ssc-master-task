@@ -1,9 +1,12 @@
 package org.example.sscmastertask.task;
 
+import org.example.sscmastertask.action.Action;
 import org.example.sscmastertask.exception.TaskNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +30,15 @@ public class TaskService {
         }
     }
 
+    public String getFormattedDateAndTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.now().format(formatter);
+    }
+
+    public String getAction(Action action) {
+        return action.toString() + ": " + getFormattedDateAndTime();
+    }
+
     public Task saveTask(Task task) {
         checkNonNullFields(task);
 
@@ -41,6 +53,7 @@ public class TaskService {
                 .minimumExperienceLevel(task.getMinimumExperienceLevel())
                 .maximumAgeInYears(task.getMaximumAgeInYears())
                 .isActive(true)
+                .modificationHistory(List.of(getAction(Action.created_at)))
                 .build();
 
         return taskRepository.insert(savedTask);
@@ -59,12 +72,15 @@ public class TaskService {
         checkNonNullFields(task);
         task.setId(id);
         task.setIsActive(true);
+        task.setModificationHistory(existedTask.getModificationHistory());
+        task.getModificationHistory().add(getAction(Action.updated_at));
         return taskRepository.save(task);
     }
 
     public void deleteTaskById(String id) {
         Task existedTask = findTaskById(id);
         existedTask.setIsActive(false);
+        existedTask.getModificationHistory().add(getAction(Action.deleted_at));
         taskRepository.save(existedTask);
     }
 

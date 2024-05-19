@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -45,4 +46,6 @@ public class User {
     private Integer experienceLevel;
 
     private Boolean isActive;
+
+    private List<String> modificationHistory;
 }
