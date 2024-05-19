@@ -3,7 +3,7 @@ package org.example.sscmastertask.user;
 import org.example.sscmastertask.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class UserService {
@@ -19,7 +19,7 @@ public class UserService {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .dateOfBirth(user.getDateOfBirth())
-                .creationDate(LocalDate.now())
+                .creationDate(LocalDateTime.now())
                 .organizationUnit(user.getOrganizationUnit())
                 .team(user.getTeam())
                 .experienceLevel(user.getExperienceLevel())

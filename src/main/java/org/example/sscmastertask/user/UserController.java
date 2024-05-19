@@ -1,5 +1,6 @@
 package org.example.sscmastertask.user;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
+    public ResponseEntity<User> saveUser(@RequestBody @Valid User user) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(userService.saveUser(user));
@@ -31,7 +32,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUserById(
             @PathVariable String id,
-            @RequestBody User user
+            @RequestBody @Valid User user
     ) {
         return ResponseEntity
                 .status(HttpStatus.OK)

@@ -1,5 +1,6 @@
 package org.example.sscmastertask.task;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class TaskController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
+    public ResponseEntity<Task> saveTask(@RequestBody @Valid Task task) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(taskService.saveTask(task));
@@ -31,7 +32,7 @@ public class TaskController {
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTaskById(
             @PathVariable String id,
-            @RequestBody Task task
+            @RequestBody @Valid Task task
     ) {
         return ResponseEntity
                 .status(HttpStatus.OK)
