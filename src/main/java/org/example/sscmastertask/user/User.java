@@ -3,6 +3,7 @@ package org.example.sscmastertask.user;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Data;
+import org.example.sscmastertask.task.Task;
 import org.example.sscmastertask.validator.date.DateAfter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -48,4 +49,10 @@ public class User {
     private Boolean isActive;
 
     private List<String> modificationHistory;
+
+    private List<Task> tasks;
+
+    public Integer ageInYears(LocalDate dateOfBirth) {
+        return LocalDate.now().getYear() - dateOfBirth.getYear();
+    }
 }

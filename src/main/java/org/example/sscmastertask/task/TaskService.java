@@ -2,6 +2,7 @@ package org.example.sscmastertask.task;
 
 import org.example.sscmastertask.action.Action;
 import org.example.sscmastertask.exception.TaskNotFoundException;
+import org.example.sscmastertask.user.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -91,5 +92,25 @@ public class TaskService {
 
     public List<Task> findAllDeletedTasks() {
         return taskRepository.findAllByIsActive(false);
+    }
+
+    public Boolean checkRequirements(User user, Task task) {
+        boolean organizationUnit = task.getOrganizationUnit() == null || user.getOrganizationUnit().equals(task.getOrganizationUnit());
+        boolean team = task.getTeam() == null || user.getTeam().equals(task.getTeam());
+        boolean experience = task.getMinimumExperienceLevel() == null || user.getExperienceLevel() >= task.getMinimumExperienceLevel();
+        boolean ageInYears = task.getMaximumAgeInYears() == null || user.ageInYears(user.getDateOfBirth()) <= task.getMaximumAgeInYears();
+
+        if (task.getAllConditionsMustBeSatisfied()) {
+            return organizationUnit && team && experience && ageInYears;
+        }
+        return organizationUnit || team || experience || ageInYears;
+    }
+
+    public List<Task> getAllUserTasks(User user) {
+        List<Task> allTasks = taskRepository.findAll();
+        return allTasks.stream()
+                .filter(task -> checkRequirements(user, task))
+                .sorted((o1, o2) -> o2.getPriority().compareTo(o1.getPriority()))
+                .toList();
     }
 }

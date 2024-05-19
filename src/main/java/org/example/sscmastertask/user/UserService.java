@@ -2,8 +2,10 @@ package org.example.sscmastertask.user;
 
 import org.example.sscmastertask.action.Action;
 import org.example.sscmastertask.exception.UserNotFoundException;
+import org.example.sscmastertask.task.TaskService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -13,9 +15,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final TaskService taskService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(
+            UserRepository userRepository, TaskService taskService
+    ) {
         this.userRepository = userRepository;
+        this.taskService = taskService;
     }
 
     public String getFormattedDateAndTime() {
@@ -25,6 +31,14 @@ public class UserService {
 
     public String getAction(Action action) {
         return action.toString() + ": " + getFormattedDateAndTime();
+    }
+
+    public Integer ageInYears(LocalDate dateOfBirth) {
+        return LocalDate.now().getYear() - dateOfBirth.getYear();
+    }
+
+    public void updateTasksForUser(User user) {
+        user.setTasks(taskService.getAllUserTasks(user));
     }
 
     public User saveUser(User user) {
@@ -40,6 +54,7 @@ public class UserService {
                 .modificationHistory(List.of(getAction(Action.created_at)))
                 .build();
 
+        updateTasksForUser(user);
         return userRepository.insert(savedUser);
     }
 
@@ -57,6 +72,7 @@ public class UserService {
         user.setIsActive(true);
         user.setModificationHistory(existedUser.getModificationHistory());
         user.getModificationHistory().add(getAction(Action.updated_at));
+        updateTasksForUser(user);
         return userRepository.save(user);
     }
 
