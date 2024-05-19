@@ -43,4 +43,6 @@ public class User {
     @Min(value = 1, message = "Experience level should be greater or equal 1")
     @Max(value = 3, message = "Experience level should be lower or equal 3")
     private Integer experienceLevel;
+
+    private Boolean isActive;
 }

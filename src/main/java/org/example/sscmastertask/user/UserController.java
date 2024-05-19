@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -45,5 +47,20 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .build();
+    }
+
+    @DeleteMapping("/delete-permanently/{id}")
+    public ResponseEntity<Void> deletePermanently(@PathVariable String id) {
+        userService.deleteUserByIdPermanently(id);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+    }
+
+    @GetMapping("/deleted-users")
+    public ResponseEntity<List<User>> getDeletedUsers() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(userService.findAllDeletedUsers());
     }
 }

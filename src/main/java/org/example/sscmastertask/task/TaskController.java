@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/tasks")
 public class TaskController {
@@ -45,5 +47,20 @@ public class TaskController {
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .build();
+    }
+
+    @DeleteMapping("/delete-permanently/{id}")
+    public ResponseEntity<Void> deleteTaskByIdPermanently(@PathVariable String id) {
+        taskService.deleteTaskByIdPermanently(id);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+    }
+
+    @GetMapping("/deleted-tasks")
+    public ResponseEntity<List<Task>> findAllDeletedTasks() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(taskService.findAllDeletedTasks());
     }
 }

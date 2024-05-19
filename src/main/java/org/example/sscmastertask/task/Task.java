@@ -49,4 +49,6 @@ public class Task {
 
     @Positive(message = "Maximum age in years must be a positive integer")
     private Integer maximumAgeInYears;
+
+    private Boolean isActive;
 }
