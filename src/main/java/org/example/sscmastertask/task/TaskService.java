@@ -99,11 +99,15 @@ public class TaskService {
         boolean team = task.getTeam() == null || user.getTeam().equals(task.getTeam());
         boolean experience = task.getMinimumExperienceLevel() == null || user.getExperienceLevel() >= task.getMinimumExperienceLevel();
         boolean ageInYears = task.getMaximumAgeInYears() == null || user.ageInYears(user.getDateOfBirth()) <= task.getMaximumAgeInYears();
+        boolean isActive = task.getIsActive() != null && task.getIsActive();
 
-        if (task.getAllConditionsMustBeSatisfied()) {
-            return organizationUnit && team && experience && ageInYears;
+        if (isActive) {
+            if (task.getAllConditionsMustBeSatisfied()) {
+                return organizationUnit && team && experience && ageInYears;
+            }
+            return organizationUnit || team || experience || ageInYears;
         }
-        return organizationUnit || team || experience || ageInYears;
+        return false;
     }
 
     public List<Task> getAllUserTasks(User user) {
