@@ -1,0 +1,141 @@
+<h1>Get Task by ID</h1>
+<form [formGroup]="taskForm" (ngSubmit)="handleSubmit()">
+  <label for="taskId">Get Task by id:</label>
+  <input type="text" id="taskId" formControlName="taskId" />
+  <button type="submit">Send</button>
+</form>
+
+<h1>Delete Task by ID</h1>
+<form [formGroup]="taskForm" (ngSubmit)="handleSubmit3()">
+  <label for="taskId">Delete Task by id:</label>
+  <input type="text" id="taskId" formControlName="taskId" />
+  <button type="submit">Send</button>
+</form>
+
+<h1>Save Task</h1>
+<form [formGroup]="saveTaskForm" (ngSubmit)="handleSubmit2()">
+  <label for="title">title:</label>
+  <input type="text" id="title" formControlName="title" />
+
+  <label for="numberOfSubtasks">numberOfSubtasks:</label>
+  <input
+    type="number"
+    id="numberOfSubtasks"
+    formControlName="numberOfSubtasks"
+  />
+
+  <label for="priority">priority:</label>
+  <input type="number" id="priority" formControlName="priority" />
+
+  <label for="creationDate">Creation date:</label>
+  <input
+    type="datetime-local"
+    id="creationDate"
+    formControlName="creationDate"
+  />
+
+  <label for="allConditionsMustBeSatisfied"
+    >allConditionsMustBeSatisfied:</label
+  >
+  <input
+    type="text"
+    id="allConditionsMustBeSatisfied"
+    formControlName="allConditionsMustBeSatisfied"
+  />
+
+  <label for="organizationUnit">organizationUnit:</label>
+  <input type="text" id="organizationUnit" formControlName="organizationUnit" />
+
+  <label for="team">team:</label>
+  <input type="text" id="team" formControlName="team" />
+
+  <label for="minimumExperienceLevel">minimumExperienceLevel:</label>
+  <input
+    type="number"
+    id="minimumExperienceLevel"
+    formControlName="minimumExperienceLevel"
+  />
+
+  <label for="maximumAgeInYears">maximumAgeInYears:</label>
+  <input
+    type="number"
+    id="maximumAgeInYears"
+    formControlName="maximumAgeInYears"
+  />
+
+  <button type="submit">Save</button>
+</form>
+
+<h1>Update Task by ID</h1>
+<form [formGroup]="saveTaskForm" (ngSubmit)="handleSubmit4()">
+  <label for="taskId">taskId:</label>
+  <input type="text" id="taskId" formControlName="taskId" />
+
+  <label for="title">title:</label>
+  <input type="text" id="title" formControlName="title" />
+
+  <label for="numberOfSubtasks">numberOfSubtasks:</label>
+  <input
+    type="number"
+    id="numberOfSubtasks"
+    formControlName="numberOfSubtasks"
+  />
+
+  <label for="priority">priority:</label>
+  <input type="number" id="priority" formControlName="priority" />
+
+  <label for="creationDate">Creation date:</label>
+  <input
+    type="datetime-local"
+    id="creationDate"
+    formControlName="creationDate"
+  />
+
+  <label for="allConditionsMustBeSatisfied"
+    >allConditionsMustBeSatisfied:</label
+  >
+  <input
+    type="text"
+    id="allConditionsMustBeSatisfied"
+    formControlName="allConditionsMustBeSatisfied"
+  />
+
+  <label for="organizationUnit">organizationUnit:</label>
+  <input type="text" id="organizationUnit" formControlName="organizationUnit" />
+
+  <label for="team">team:</label>
+  <input type="text" id="team" formControlName="team" />
+
+  <label for="minimumExperienceLevel">minimumExperienceLevel:</label>
+  <input
+    type="number"
+    id="minimumExperienceLevel"
+    formControlName="minimumExperienceLevel"
+  />
+
+  <label for="maximumAgeInYears">maximumAgeInYears:</label>
+  <input
+    type="number"
+    id="maximumAgeInYears"
+    formControlName="maximumAgeInYears"
+  />
+
+  <button type="submit">Save</button>
+</form>
+
+@if (task != null) {
+<h1>title: {{ task.title }}</h1>
+<h3>priority: {{ task.priority }}</h3>
+<h3>creationDate: {{ task.creationDate }}</h3>
+<h3>team: {{ task.team }}</h3>
+<h3>modificationHistory</h3>
+@for(action of task.modificationHistory; track action) {
+<li>{{ action }}</li>
+} } @if(error) {
+<div class="error">
+  <h1>Error</h1>
+  <h3>Status: {{ error.status }}</h3>
+  <h3>Code: {{ error.code }}</h3>
+  <h3>Message: {{ error.message.detail }}</h3>
+</div>
+}
