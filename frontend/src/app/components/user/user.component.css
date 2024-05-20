@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.forms h1,
+.content h1 {
+  margin-top: 2rem;
+}
+
+#container {
+  display: flex;
+  justify-content: space-around;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content {
+  width: 50%;
+}

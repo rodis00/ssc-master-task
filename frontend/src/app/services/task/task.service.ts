@@ -26,4 +26,8 @@ export class TaskService {
   public updateTask(id: string, task: Task): Observable<any> {
     return this.http.put<Task>(`${this.apiUrl}/tasks/${id}`, task);
   }
+
+  public getDeletedTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}/tasks/deleted-tasks`);
+  }
 }

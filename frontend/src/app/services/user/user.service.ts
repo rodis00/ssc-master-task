@@ -22,4 +22,12 @@ export class UserService {
   public deleteUserById(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
   }
+
+  public updateUserById(id: string, user: User2): Observable<User2> {
+    return this.http.put<User2>(`${this.apiUrl}/users/${id}`, user);
+  }
+
+  public getDeletedUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users/deleted-users`);
+  }
 }

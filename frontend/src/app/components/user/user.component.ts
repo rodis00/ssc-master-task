@@ -24,6 +24,7 @@ export class UserComponent {
   });
 
   saveUserForm = new FormGroup({
+    id: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     dateOfBirth: new FormControl(''),
@@ -71,6 +72,18 @@ export class UserComponent {
     );
   }
 
+  private updateUser(id: string, user: User2): void {
+    this.userService.updateUserById(id, user).subscribe(
+      (user: User2) => {
+        console.log(this.user2);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        this.error = error.error;
+      }
+    );
+  }
+
   public handleSubmit(): void {
     let userId = this.userForm.value.userId!;
     console.log(userId);
@@ -91,6 +104,25 @@ export class UserComponent {
   }
 
   private createUser(userData: any): void {
+    this.user2.firstName = userData.firstName;
+    this.user2.lastName = userData.lastName;
+    this.user2.creationDate = userData.creationDate;
+    this.user2.dateOfBirth = userData.dateOfBirth;
+    this.user2.organizationUnit = userData.organizationUnit;
+    this.user2.team = userData.team;
+    this.user2.experienceLevel = userData.experienceLevel;
+  }
+
+  public handleSubmit4(): void {
+    let userData = this.saveUserForm.value!;
+    console.log(userData);
+
+    this.createUser2(userData);
+    this.updateUser(this.user2.id, this.user2);
+  }
+
+  private createUser2(userData: any): void {
+    this.user2.id = userData.id;
     this.user2.firstName = userData.firstName;
     this.user2.lastName = userData.lastName;
     this.user2.creationDate = userData.creationDate;

@@ -15,6 +15,7 @@ export interface User {
 }
 
 export interface User2 {
+  id: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;

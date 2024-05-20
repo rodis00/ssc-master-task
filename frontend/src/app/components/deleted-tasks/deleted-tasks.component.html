@@ -1,0 +1,14 @@
+<h1>Deleted tasks:</h1>
+
+@for(task of tasks; track task.id) {
+<div class="details">
+  <h1>title: {{ task.title }}</h1>
+  <h3>priority: {{ task.priority }}</h3>
+  <h3>creationDate: {{ task.creationDate }}</h3>
+  <h3>team: {{ task.team }}</h3>
+  <h3>modificationHistory</h3>
+  @for(action of task.modificationHistory; track action) {
+  <li>{{ action }}</li>
+  }
+</div>
+}

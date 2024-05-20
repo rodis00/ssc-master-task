@@ -1,0 +1,17 @@
+<h1>Deleted users:</h1>
+
+@for(user of users; track user.id) {
+<div class="details">
+  <div class="name">
+    <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+  </div>
+  <h4>dateOfBirth:{{ user.dateOfBirth }}</h4>
+  <h4>experienceLevel: {{ user.experienceLevel }}</h4>
+  <h4>organizationUnit: {{ user.organizationUnit }}</h4>
+  <h4>team: {{ user.team }}</h4>
+  <h4>modificationHistory:</h4>
+  @for(action of user.modificationHistory; track action) {
+  <li>{{ action }}</li>
+  }
+</div>
+}
