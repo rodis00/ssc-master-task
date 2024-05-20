@@ -1,0 +1,19 @@
+# Wykonane zadania:
+- [x] zad 1 - Postawienie środowisko Spring Boot + Maven
+- [x] zad 2 - Nawiązanie połączenie z bazą danych MongoDB
+- [x] zad 3 - Utworzenie klas
+- [x] zad 4 - Walidacja obiektów
+- [x] zad 5 - Możliwość nietrwałego usuwania obiektów z bazy danych
+- [x] zad 6 - Dodanie pól modificationHistory
+- [x] zad 7 - Dodanie pól modificationHistory
+- [ ] zad 8 - testy aplikacji (nie wykonane)
+- [x] zad 9 - Graficzny interfejs 
+  - endpointy angulara:
+    - `http://localhost:4200/task`
+    - `http://localhost:4200/deleted-tasks`
+    - `http://localhost:4200/user`
+    - `http://localhost:4200/deleted-users`
+- [x] zad 10 - Własna inwencja
+  - dodanie klasy ApiResponse do zwracania obiektów, wyjątków aplikacji oraz informacji walidacji
+  - dodanie klas wyjątków i global handlera do nich
+  - pominięcie tasków w liście usera które są nietrwale usunięte
